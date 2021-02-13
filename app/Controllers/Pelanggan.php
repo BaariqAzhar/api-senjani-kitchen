@@ -35,11 +35,11 @@ class Pelanggan extends ResourceController
         $pelanggan->created_date = date("Y-m-d H:i:s");
 
         if ($this->model->save($pelanggan)) {
-            $pelanggan_id = $this->model->getInsertId();
+            $id_pelanggan = $this->model->getInsertId();
 
             // return $this->respondCreated($pelanggan, 'pelanggan baru terbuat (created)');
 
-            return $this->respondCreated(['pelanggan_id' => $pelanggan_id, 'status' => 'success', 'info' => 'register, create']);
+            return $this->respondCreated(['id_pelanggan' => $id_pelanggan, 'status' => 'success', 'info' => 'register, create']);
         }
     }
 
@@ -50,7 +50,7 @@ class Pelanggan extends ResourceController
         }
 
         $data = $this->request->getRawInput();
-        $data['pelanggan_id'] = $id;
+        $data['id_pelanggan'] = $id;
         $validate = $this->validation->run($data, 'registerNext');
         $errors = $this->validation->getErrors();
 
@@ -65,7 +65,7 @@ class Pelanggan extends ResourceController
 
         if ($this->model->save($pelanggan)) {
             // return $this->respondUpdated($pelanggan, 'pelanggan telah diperbaharui (updated)');
-            return $this->respondUpdated(['pelanggan_id' => $id, 'status' => 'success', 'info' => 'registerNext, update']);
+            return $this->respondUpdated(['id_pelanggan' => $id, 'status' => 'success', 'info' => 'registerNext, update']);
         }
     }
 
@@ -74,19 +74,19 @@ class Pelanggan extends ResourceController
         $data = $this->request->getPost();
         $pelanggan = new \App\Entities\Pelanggan();
         $pelanggan->fill($data);
-        $pelangganIdFromDatabase = $this->model->where('email', $pelanggan->email)->findColumn('pelanggan_id');
+        $pelangganIdFromDatabase = $this->model->where('email', $pelanggan->email)->findColumn('id_pelanggan');
         $passwordFromDatabase = $this->model->where('email', $pelanggan->email)->findColumn('password');
 
         if (empty($passwordFromDatabase)) {
-            return $this->respond(['pelanggan_id' => '', 'status' => 'fail', 'info' => 'Login, login, email not found']);
+            return $this->respond(['id_pelanggan' => '', 'status' => 'fail', 'info' => 'Login, login, email not found']);
         }
 
         $passwordInput = $pelanggan->password;
 
         if (implode($passwordFromDatabase) === $passwordInput) {
-            return $this->respond(['pelanggan_id' => implode($pelangganIdFromDatabase), 'status' => 'success', 'info' => 'Login, login']);
+            return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'success', 'info' => 'Login, login']);
         } else {
-            return $this->respond(['pelanggan_id' => implode($pelangganIdFromDatabase), 'status' => 'fail', 'info' => 'Login, login, wrong password']);
+            return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'fail', 'info' => 'Login, login, wrong password']);
         }
     }
 }

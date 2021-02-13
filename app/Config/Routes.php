@@ -34,6 +34,7 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->add('login', 'Pelanggan::login');
 $routes->resource('pelanggan');
+$routes->resource('paketkupon');
 
 /*
  * --------------------------------------------------------------------
