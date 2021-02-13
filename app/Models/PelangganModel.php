@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 namespace App\Models;
 
@@ -7,11 +7,10 @@ use CodeIgniter\Model;
 class PelangganModel extends Model
 {
     protected $table = 'pelanggan';
-    protected $primaryKey = 'pelanggan_id';
+    protected $primaryKey = 'id_pelanggan';
     protected $allowedFields = [
         'email',
         'password',
-        'salt',
         'nama_lengkap',
         'alamat',
         'no_hp_wa',
@@ -23,5 +22,4 @@ class PelangganModel extends Model
     ];
     protected $returnType = 'App\Entities\Pelanggan';
     protected $useTimestamps = false;
-
 }
