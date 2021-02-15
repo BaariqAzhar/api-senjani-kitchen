@@ -122,3 +122,7 @@ create TABLE pesanan(
     updated_by int(11),
     updated_date datetime
 ) engine = innodb;
+
+ALTER TABLE pesanan
+    FOREIGN KEY (id_menu)
+    REFERENCES menu(id_menu);
