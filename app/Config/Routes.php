@@ -41,6 +41,11 @@ $routes->resource('paketkupon');
 $routes->add('kuponpelanggan/uploadbukti', 'KuponPelanggan::uploadBukti');
 $routes->resource('kuponpelanggan');
 
+$routes->resource('menu');
+
+$routes->add('pesanan/updatepesanan', 'Pesanan::updatePesanan');
+$routes->resource('pesanan');
+
 /*
  * --------------------------------------------------------------------
  * Additional Routing
