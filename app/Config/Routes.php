@@ -38,7 +38,7 @@ $routes->resource('pelanggan');
 $routes->add('paketkupon/showpaketkupon', 'PaketKupon::showPaketKupon');
 $routes->resource('paketkupon');
 
-
+$routes->add('kuponpelanggan/uploadbukti', 'KuponPelanggan::uploadBukti');
 $routes->resource('kuponpelanggan');
 
 /*

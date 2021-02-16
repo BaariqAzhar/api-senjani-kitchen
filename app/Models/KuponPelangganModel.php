@@ -6,7 +6,7 @@ use CodeIgniter\Model;
 
 class KuponPelangganModel extends Model
 {
-    protected $table = 'paket_kupon';
+    protected $table = 'kupon_pelanggan';
     protected $primaryKey = 'id_kupon_pelanggan';
     protected $allowedFields = [
         'kode_kupon_pelanggan',

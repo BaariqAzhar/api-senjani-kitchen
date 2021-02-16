@@ -3,10 +3,12 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+use DateTime;
+use DateTimeZone;
 
 class KuponPelanggan extends ResourceController
 {
-    protected $modelName = 'App\Models\PaketKuponModel';
+    protected $modelName = 'App\Models\KuponPelangganModel';
     protected $format = 'json';
 
     public function __construct()
@@ -17,5 +19,66 @@ class KuponPelanggan extends ResourceController
     public function index()
     {
         return $this->respond($this->model->findAll());
+    }
+
+    public function create()
+    {
+        $data = $this->request->getPost();
+        date_default_timezone_set('asia/jakarta');
+        $kode_kupon_pelanggan = "KP" . rand(0, 999) . "-PK" . $data['kode_paket_kupon'] . "-D" . date("YmdHis");
+        unset($data['kode_paket_kupon']);
+        $data['id_paket_kupon'] = (int) $data['id_paket_kupon'];
+        $data['id_pelanggan'] = (int) $data['id_pelanggan'];
+        $data['kode_kupon_pelanggan'] = $kode_kupon_pelanggan;
+        $data['tanggal_pembelian_kupon'] = date("Y-m-d H:i:s");
+        $data['tanggal_kedaluwarsa'] = date("Y-m-d H:i:s", strtotime("+1 year"));
+        $data['jumlah_kupon_tersisa'] = (int) $data['jumlah_kupon'];
+        unset($data['jumlah_kupon']);
+        $data['status_kupon'] = "belum_dibayar";
+        $data['created_by'] = 0;
+        $data['created_date'] = date("Y-m-d H:i:s");
+        if ($this->model->save($data)) {
+            $id_kupon_pelanggan = $this->model->getInsertId();
+            return $this->respondCreated(['id_kupon_pelanggan' => $id_kupon_pelanggan, 'status' => 'success', 'info' => 'create (kupon pelanggan)', 'data' => $data]);
+        }
+        // return $this->respond($data);
+    }
+
+    public function update($id = null)
+    {
+        if (!$this->model->find($id)) {
+            return $this->fail('id tidak ditemukan');
+        };
+
+        $data = $this->request->getRawInput();
+        $data['id_kupon_pelanggan'] = $id;
+        date_default_timezone_set('asia/jakarta');
+        $data['waktu_batas_pembayaran'] = date("Y-m-d H:i:s", strtotime("+3 hour"));
+        $data['updated_by'] = 0;
+        $data['updated_date'] = date("Y-m-d H:i:s");
+
+        if ($this->model->save($data)) {
+            $id_kupon_pelanggan = $this->model->getInsertId();
+            return $this->respondUpdated(['id_kupon_pelanggan' => $id_kupon_pelanggan, 'status' => 'success', 'info' => 'update (kupon pelanggan)', 'data' => $data]);
+        }
+        // return $this->respondUpdated($data);
+    }
+
+    public function uploadBukti()
+    {
+        helper(['form']);
+        $data = $this->request->getPost();
+        // if (!$this->model->find($data['id_kupon_pelanggan'])) {
+        //     return $this->fail('id tidak ditemukan');
+        // };
+        
+        $file = $this->request->getFile('bukti_pembayaran');
+        $file->move('./assets/UploadBuktiPembayaran');
+
+        date_default_timezone_set('asia/jakarta');
+        $data['updated_by'] = 0;
+        $data['updated_date'] = date("Y-m-d H:i:s");
+
+        return $this->respondUpdated($data);
     }
 }
