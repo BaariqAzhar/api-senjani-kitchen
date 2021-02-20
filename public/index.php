@@ -1,9 +1,12 @@
 <?php
 
+header("Access-Control-Allow-Origin: http://localhost:3000/");
+header('Access-Control-Allow-Methods: GET, POST, OPTIONS');
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+
 // Valid PHP Version?
 $minPHPVersion = '7.3';
-if (version_compare(PHP_VERSION, $minPHPVersion, '<'))
-{
+if (version_compare(PHP_VERSION, $minPHPVersion, '<')) {
 	die("Your PHP version must be {$minPHPVersion} or higher to run CodeIgniter. Current version: " . PHP_VERSION);
 }
 unset($minPHPVersion);

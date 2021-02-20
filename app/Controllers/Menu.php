@@ -3,9 +3,6 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
-use DateTime;
-use DateTimeZone;
-
 class Menu extends ResourceController
 {
     protected $modelName = 'App\Models\MenuModel';
