@@ -36,9 +36,12 @@ $routes->add('login', 'Pelanggan::login');
 $routes->resource('pelanggan');
 
 $routes->add('paketkupon/showpaketkupon', 'PaketKupon::showPaketKupon');
+$routes->add('paketkupon/showPaketKuponBerdasarkanJenisPaketKupon', 'PaketKupon::showPaketKuponBerdasarkanJenisPaketKupon');
 $routes->resource('paketkupon');
 
 $routes->add('kuponpelanggan/uploadbukti', 'KuponPelanggan::uploadBukti');
+$routes->add('kuponpelanggan/createKuponPelanggan', 'KuponPelanggan::createKuponPelanggan');
+$routes->add('kuponpelanggan/updateKuponPelanggan', 'KuponPelanggan::updateKuponPelanggan');
 $routes->resource('kuponpelanggan');
 
 $routes->resource('menu');
