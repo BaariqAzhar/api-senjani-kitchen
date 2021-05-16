@@ -26,4 +26,12 @@ class PaketKupon extends ResourceController
         $dataFromDatabase = $this->model->where('jenis_paket_kupon', $jenisPaketKupon)->findAll();
         return $this->respond($dataFromDatabase);
     }
+
+    public function showPaketKuponBerdasarkanJenisPaketKupon()
+    {
+        $data = $this->request->getPost();
+        $jenisPaketKupon = $data['jenis_paket_kupon'];
+        $dataFromDatabase = $this->model->where('jenis_paket_kupon', $jenisPaketKupon)->findAll();
+        return $this->respond($dataFromDatabase);
+    }
 }

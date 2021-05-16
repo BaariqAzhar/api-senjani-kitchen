@@ -84,7 +84,8 @@ class Pelanggan extends ResourceController
         $passwordInput = $pelanggan->password;
 
         if (implode($passwordFromDatabase) === $passwordInput) {
-            return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'success', 'info' => 'Login, login']);
+            $dataPelangganFromDatabase = $this->model->find($pelangganIdFromDatabase);
+            return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'success', 'info' => 'Login, login', 'dataPelanggan' => $dataPelangganFromDatabase]);
         } else {
             return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'fail', 'info' => 'Login, login, wrong password']);
         }
