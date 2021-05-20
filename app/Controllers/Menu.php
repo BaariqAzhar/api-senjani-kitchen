@@ -3,6 +3,7 @@
 namespace App\Controllers;
 
 use CodeIgniter\RESTful\ResourceController;
+
 class Menu extends ResourceController
 {
     protected $modelName = 'App\Models\MenuModel';
@@ -14,6 +15,11 @@ class Menu extends ResourceController
     }
 
     public function index()
+    {
+        return $this->respond($this->model->findAll());
+    }
+
+    public function showAllMenu()
     {
         return $this->respond($this->model->findAll());
     }

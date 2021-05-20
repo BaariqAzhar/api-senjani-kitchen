@@ -48,8 +48,7 @@ class Validation
 			'rules' => 'required'
 		]
 	];
-	public $registerNext = [
-	];
+	public $registerNext = [];
 	public $update_pelanggan = [
 		'email' => [
 			'rules' => 'required|min_length[5]|is_unique[pelanggan.email,id,{id}]',

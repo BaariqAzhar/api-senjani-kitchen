@@ -33,6 +33,7 @@ $routes->setAutoRoute(true);
 // route since we don't have to scan directories.
 $routes->get('/', 'Home::index');
 $routes->add('login', 'Pelanggan::login');
+$routes->add('register', 'Pelanggan::register');
 $routes->resource('pelanggan');
 
 $routes->add('paketkupon/showpaketkupon', 'PaketKupon::showPaketKupon');
@@ -44,10 +45,16 @@ $routes->add('kuponpelanggan/createKuponPelanggan', 'KuponPelanggan::createKupon
 $routes->add('kuponpelanggan/updateKuponPelanggan', 'KuponPelanggan::updateKuponPelanggan');
 $routes->resource('kuponpelanggan');
 
+$routes->add('menu/showAllMenu', 'Menu::showAllMenu');
 $routes->resource('menu');
 
 $routes->add('pesanan/updatepesanan', 'Pesanan::updatePesanan');
+$routes->add('pesanan/createPesanan', 'Pesanan::createPesanan');
 $routes->resource('pesanan');
+
+$routes->add('mix/showKuponPelangganBerdasarkanIdPelanggan', 'Mix::showKuponPelangganBerdasarkanIdPelanggan');
+$routes->add('mix/showPesananBerdasarkanIdPelanggan', 'Mix::showPesananBerdasarkanIdPelanggan');
+$routes->add('mix/createPesanan', 'Mix::createPesanan');
 
 /*
  * --------------------------------------------------------------------

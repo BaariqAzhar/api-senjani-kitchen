@@ -90,4 +90,32 @@ class Pelanggan extends ResourceController
             return $this->respond(['id_pelanggan' => implode($pelangganIdFromDatabase), 'status' => 'fail', 'info' => 'Login, login, wrong password']);
         }
     }
+
+    public function register()
+    {
+        $data = $this->request->getPost();
+        if (!$this->model->where('email', $data['email'])) {
+            return $this->respond(['messages' => "email telah terdaftar"]);
+        }
+        $validate = $this->validation->run($data, 'register');
+        $errors = $this->validation->getErrors();
+
+        if ($errors) {
+            // return $this->fail($errors);
+            return $this->respond($errors);
+        }
+
+        $pelanggan = new \App\Entities\Pelanggan();
+        $pelanggan->fill($data);
+        $pelanggan->created_by = 0;
+        $pelanggan->created_date = date("Y-m-d H:i:s");
+
+        if ($this->model->save($pelanggan)) {
+            $id_pelanggan = $this->model->getInsertId();
+            $dataPelangganFromDatabase = $this->model->find($id_pelanggan);
+            // return $this->respondCreated($pelanggan, 'pelanggan baru terbuat (created)');
+
+            return $this->respondCreated(['id_pelanggan' => $id_pelanggan, 'status' => 'success', 'info' => 'register, create', 'dataPelanggan' => $dataPelangganFromDatabase]);
+        }
+    }
 }
