@@ -63,4 +63,32 @@ class Pesanan extends ResourceController
         $data = $newData;
         return $this->respondUpdated($data);
     }
+
+    public function createPesanan()
+    {
+        date_default_timezone_set('asia/jakarta');
+        $data = $this->request->getPost();
+        $data['id_menu'] = explode(',', $data['ids_menu']);
+
+        $newData = [];
+        foreach ($data['id_menu'] as $item) {
+            $dataItem['id_pelanggan'] = (int) $data['id_pelanggan'];
+            $dataItem['id_menu'] = (int) $item;
+            $dataItem['id_kupon_pelanggan'] = (int) $data['id_kupon_pelanggan'];
+            $dataItem['kode_pesanan'] = "P" . rand(0, 999) . "-KP" . $data['id_kupon_pelanggan'] . "-D" . date("YmdHis");
+            $dataItem['waktu_pemesanan'] = date("Y-m-d H:i:s");
+            $dataItem['nama_penerima'] = $data['nama_penerima'];
+            $dataItem['no_hp_wa_penerima'] = $data['no_hp_wa_penerima'];
+            $dataItem['alamat_penerima'] = $data['alamat_penerima'];
+            $dataItem['alergi_makanan_penerima'] = $data['alergi_makanan_penerima'];
+            $dataItem['status_pesanan'] = "belum_dikirim";
+            $dataItem['catatan_pesanan'] = $data['catatan_pesanan'];
+            $dataItem['created_by'] = 0;
+            $dataItem['created_date'] = date("Y-m-d H:i:s");
+            array_push($newData, $dataItem);
+            $this->model->save($dataItem);
+        }
+        $data = $newData;
+        return $this->respondCreated($data);
+    }
 }
