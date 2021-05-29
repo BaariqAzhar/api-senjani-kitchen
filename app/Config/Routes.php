@@ -52,6 +52,10 @@ $routes->add('pesanan/updatepesanan', 'Pesanan::updatePesanan');
 $routes->add('pesanan/createPesanan', 'Pesanan::createPesanan');
 $routes->resource('pesanan');
 
+$routes->add('admin/register', 'Admin::register');
+$routes->add('admin/login', 'Admin::login');
+$routes->resource('admin');
+
 $routes->add('mix/showKuponPelangganBerdasarkanIdPelanggan', 'Mix::showKuponPelangganBerdasarkanIdPelanggan');
 $routes->add('mix/showPesananBerdasarkanIdPelanggan', 'Mix::showPesananBerdasarkanIdPelanggan');
 $routes->add('mix/createPesanan', 'Mix::createPesanan');
