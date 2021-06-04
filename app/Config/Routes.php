@@ -46,6 +46,9 @@ $routes->add('kuponpelanggan/updateKuponPelanggan', 'KuponPelanggan::updateKupon
 $routes->resource('kuponpelanggan');
 
 $routes->add('menu/showAllMenu', 'Menu::showAllMenu');
+$routes->add('menu/createMenu', 'Menu::createMenu');
+$routes->add('menu/updateMenu', 'Menu::updateMenu');
+$routes->add('menu/updateMenuNoFoto', 'Menu::updateMenuNoFoto');
 $routes->resource('menu');
 
 $routes->add('pesanan/updatepesanan', 'Pesanan::updatePesanan');
