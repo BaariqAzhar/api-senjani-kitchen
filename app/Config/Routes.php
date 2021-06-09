@@ -2,6 +2,8 @@
 
 namespace Config;
 
+use App\Controllers\PaketKupon;
+
 // Create a new instance of our RouteCollection class.
 $routes = Services::routes();
 
@@ -34,15 +36,21 @@ $routes->setAutoRoute(true);
 $routes->get('/', 'Home::index');
 $routes->add('login', 'Pelanggan::login');
 $routes->add('register', 'Pelanggan::register');
+$routes->add('pelanggan/showAllPelanggan', 'Pelanggan::showAllPelanggan');
+$routes->add('pelanggan/updatePelanggan', 'Pelanggan::updatePelanggan');
 $routes->resource('pelanggan');
 
 $routes->add('paketkupon/showpaketkupon', 'PaketKupon::showPaketKupon');
 $routes->add('paketkupon/showPaketKuponBerdasarkanJenisPaketKupon', 'PaketKupon::showPaketKuponBerdasarkanJenisPaketKupon');
+$routes->add('paketkupon/showAllPaketKupon', 'PaketKupon::showAllPaketKupon');
+$routes->add('paketkupon/updatePaketKupon', 'PaketKupon::updatePaketKupon');
 $routes->resource('paketkupon');
 
 $routes->add('kuponpelanggan/uploadbukti', 'KuponPelanggan::uploadBukti');
 $routes->add('kuponpelanggan/createKuponPelanggan', 'KuponPelanggan::createKuponPelanggan');
 $routes->add('kuponpelanggan/updateKuponPelanggan', 'KuponPelanggan::updateKuponPelanggan');
+$routes->add('kuponpelanggan/adminUpdateKuponPelanggan', 'KuponPelanggan::adminUpdateKuponPelanggan');
+$routes->add('kuponpelanggan/adminUpdateKuponPelangganNoFoto', 'KuponPelanggan::adminUpdateKuponPelangganNoFoto');
 $routes->resource('kuponpelanggan');
 
 $routes->add('menu/showAllMenu', 'Menu::showAllMenu');
@@ -53,6 +61,8 @@ $routes->resource('menu');
 
 $routes->add('pesanan/updatepesanan', 'Pesanan::updatePesanan');
 $routes->add('pesanan/createPesanan', 'Pesanan::createPesanan');
+$routes->add('pesanan/showAllPesanan', 'Pesanan::showAllPesanan');
+$routes->add('pesanan/adminUpdatePesanan', 'Pesanan::adminUpdatePesanan');
 $routes->resource('pesanan');
 
 $routes->add('admin/register', 'Admin::register');
@@ -61,6 +71,8 @@ $routes->resource('admin');
 
 $routes->add('mix/showKuponPelangganBerdasarkanIdPelanggan', 'Mix::showKuponPelangganBerdasarkanIdPelanggan');
 $routes->add('mix/showPesananBerdasarkanIdPelanggan', 'Mix::showPesananBerdasarkanIdPelanggan');
+$routes->add('mix/showAllKuponPelanggan', 'Mix::showAllKuponPelanggan');
+$routes->add('mix/showBuktiPembayaranStatusMenungguDiverifikasi', 'Mix::showBuktiPembayaranStatusMenungguDiverifikasi');
 $routes->add('mix/createPesanan', 'Mix::createPesanan');
 
 /*

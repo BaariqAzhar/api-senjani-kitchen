@@ -34,4 +34,23 @@ class PaketKupon extends ResourceController
         $dataFromDatabase = $this->model->where('jenis_paket_kupon', $jenisPaketKupon)->findAll();
         return $this->respond($dataFromDatabase);
     }
+
+    public function showAllPaketKupon()
+    {
+        return $this->respond($this->model->findAll());
+    }
+
+    public function updatePaketKupon()
+    {
+        date_default_timezone_set('asia/jakarta');
+
+        $dataInput = $this->request->getPost();
+        $dataInput['updated_by'] = 10;
+        $dataInput['updated_date'] = date("Y-m-d H:i:s");
+
+        if ($this->model->save($dataInput)) {
+            $dataFromDatabase = $this->model->find($dataInput['id_paket_kupon']);
+            return $this->respond(['id_menu' => $dataInput['id_paket_kupon'], 'status' => 'success', 'info' => 'update paket kupon successfully', 'dataPaketKupon' => $dataFromDatabase]);
+        }
+    }
 }

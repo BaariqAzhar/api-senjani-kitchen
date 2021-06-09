@@ -91,4 +91,18 @@ class Pesanan extends ResourceController
         $data = $newData;
         return $this->respondCreated($data);
     }
+
+    public function adminUpdatePesanan()
+    {
+        date_default_timezone_set('asia/jakarta');
+
+        $dataInput = $this->request->getPost();
+        $dataInput['updated_by'] = 10;
+        $dataInput['updated_date'] = date("Y-m-d H:i:s");
+
+        if ($this->model->save($dataInput)) {
+            $dataMenuFromDatabase = $this->model->find($dataInput['id_pesanan']);
+            return $this->respond(['id_pesanan' => $dataInput['id_pesanan'], 'status' => 'success', 'info' => 'update pesanan successfully', 'dataPesanan' => $dataMenuFromDatabase]);
+        }
+    }
 }
