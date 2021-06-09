@@ -6,6 +6,7 @@ use App\Models\KuponPelangganModel;
 use CodeIgniter\RESTful\ResourceController;
 use App\Models\MixModel;
 use App\Models\PesananModel;
+use CodeIgniter\Model;
 
 class Mix extends ResourceController
 {
@@ -69,6 +70,27 @@ class Mix extends ResourceController
         $mixModel = new MixModel();
         $data = $mixModel->getPesananKuponPelangganMenu($dataRequest['id_pelanggan']);
 
+        return $this->respond($data);
+    }
+
+    public function showAllKuponPelanggan()
+    {
+        $mixModel = new MixModel();
+        $data = $mixModel->getAllKuponPelangganPaketKuponPelanggan();
+        return $this->respond($data);
+    }
+
+    public function showAllPesanan()
+    {
+        $mixModel = new MixModel();
+        $data = $mixModel->getAllPesananOthers();
+        return $this->respond($data);
+    }
+
+    public function showBuktiPembayaranStatusMenungguDiverifikasi()
+    {
+        $mixModel = new MixModel();
+        $data = $mixModel->getKuponPelangganPelangganPaketKuponStatusMenunggu();
         return $this->respond($data);
     }
 }

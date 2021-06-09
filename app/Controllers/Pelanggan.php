@@ -118,4 +118,22 @@ class Pelanggan extends ResourceController
             return $this->respondCreated(['id_pelanggan' => $id_pelanggan, 'status' => 'success', 'info' => 'register, create', 'dataPelanggan' => $dataPelangganFromDatabase]);
         }
     }
+
+    public function showAllPelanggan()
+    {
+        return $this->respond($this->model->findAll());
+    }
+
+    public function updatePelanggan()
+    {
+        $data = $this->request->getPost();
+
+        $data['updated_by'] = 10;
+        $data['updated_date'] = date("Y-m-d H:i:s");
+
+        if ($this->model->save($data)) {
+            $dataPelangganFromDatabase = $this->model->find($data['id_pelanggan']);
+            return $this->respondCreated(['id_pelanggan' => $data['id_pelanggan'], 'status' => 'success', 'info' => 'update pelanggan', 'dataPelanggan' => $dataPelangganFromDatabase]);
+        }
+    }
 }

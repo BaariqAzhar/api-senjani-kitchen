@@ -36,7 +36,7 @@ class Menu extends ResourceController
         $file->move('./assets/fotoMenu', $newName);
 
         $dataInput['foto_menu'] = $newName;
-        $dataInput['created_by'] = 1;
+        $dataInput['created_by'] = 10;
         $dataInput['created_date'] = date("Y-m-d H:i:s");
 
         if ($this->model->save($dataInput)) {
@@ -58,7 +58,7 @@ class Menu extends ResourceController
         $file->move('./assets/fotoMenu', $newName);
 
         $dataInput['foto_menu'] = $newName;
-        $dataInput['updated_by'] = 1;
+        $dataInput['updated_by'] = 10;
         $dataInput['updated_date'] = date("Y-m-d H:i:s");
         
         if ($this->model->save($dataInput)) {
@@ -73,7 +73,7 @@ class Menu extends ResourceController
         helper(['form']);
 
         $dataInput = $this->request->getPost();
-        $dataInput['updated_by'] = 1;
+        $dataInput['updated_by'] = 10;
         $dataInput['updated_date'] = date("Y-m-d H:i:s");
         
         if ($this->model->save($dataInput)) {
