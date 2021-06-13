@@ -13,7 +13,7 @@ class Admin extends ResourceController
     {
         $dataInput = $this->request->getPost();
         if (count($this->model->where('email_admin', $dataInput['email_admin'])->findAll()) > 0) {
-            return $this->respond(['messages' => "email telah terdaftar"]);
+            return $this->respond(['status' => 'failed', 'info' => 'email already has registered']);
         } else {
             $newData = $dataInput;
             $newData['password'] = md5($dataInput['password']);
