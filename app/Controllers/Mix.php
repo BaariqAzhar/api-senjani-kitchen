@@ -83,7 +83,8 @@ class Mix extends ResourceController
     public function showAllPesanan()
     {
         $mixModel = new MixModel();
-        $data = $mixModel->getAllPesananOthers();
+        // $data = $mixModel->getAllPesananOthers();
+        $data = $mixModel->getAllPesananStatusSudahDibayar();
         return $this->respond($data);
     }
 
